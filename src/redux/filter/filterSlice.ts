@@ -5,6 +5,7 @@ const initialState: IFiltersState = {
   status: "all",
   title: "",
   description: "",
+  isResetFilters: false,
 };
 
 const filterSlice = createSlice({
@@ -23,8 +24,14 @@ const filterSlice = createSlice({
         state.description = description;
       }
     },
+    filtersReset: (state) => {
+      state.status = "all";
+      state.title = "";
+      state.description = "";
+      state.isResetFilters = true;
+    },
   },
 });
 
-export const { setFilters } = filterSlice.actions;
+export const { setFilters, filtersReset } = filterSlice.actions;
 export const filtersReducer = filterSlice.reducer;

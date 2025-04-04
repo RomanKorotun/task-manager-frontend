@@ -30,6 +30,7 @@ export interface IFiltersState {
   status: string;
   title: string;
   description: string;
+  isResetFilters: boolean;
 }
 
 export interface ISetFilters {

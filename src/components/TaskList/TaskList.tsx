@@ -12,6 +12,9 @@ export const TaskList: FC = () => {
   const description = useSelector(
     (state: RootState) => state.filters.description
   );
+  const isResetFilters = useSelector(
+    (state: RootState) => state.filters.isResetFilters
+  );
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,15 +29,22 @@ export const TaskList: FC = () => {
       dispatch(getAllTasks({ status, title, description }));
       isFirstMounting.current = false;
     }
+  }, [dispatch, status, title, description]);
 
-    if (status !== prevStatus.current) {
+  useEffect(() => {
+    if (isResetFilters) {
+      dispatch(getAllTasks({ status, title, description }));
+    }
+
+    if (status !== prevStatus.current && !isResetFilters) {
       dispatch(getAllTasks({ status, title, description }));
       prevStatus.current = status;
     }
 
     if (
-      title !== prevTitle.current ||
-      description !== prevDescription.current
+      (title !== prevTitle.current ||
+        description !== prevDescription.current) &&
+      !isResetFilters
     ) {
       if (timer.current) {
         clearTimeout(timer.current);
@@ -53,11 +63,12 @@ export const TaskList: FC = () => {
         clearTimeout(timer.current);
       }
     };
-  }, [status, title, description, dispatch]);
+  }, [status, title, description, isResetFilters, dispatch]);
 
   return (
     <>
       <Title>My tasks</Title>
+      {items.length === 0 && <div>No tasks found ...</div>}
       <List>
         {items.map((task) => (
           <Item key={task.id}>
