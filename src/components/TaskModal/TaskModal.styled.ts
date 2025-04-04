@@ -4,6 +4,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { ErrorMessage, Field, Form } from "formik";
 
 export const CustomModal = styled(Modal)`
+  background-color: #ffffff;
   position: relative;
   border-radius: 10px;
   top: 50%;

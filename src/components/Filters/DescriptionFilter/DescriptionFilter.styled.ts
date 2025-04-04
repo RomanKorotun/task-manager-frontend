@@ -11,4 +11,5 @@ export const Title = styled.div`
 
 export const Input = styled.input`
   height: 28px;
+  width: 149px;
 `;
