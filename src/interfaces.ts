@@ -4,7 +4,7 @@ export interface ICreateTaskData {
   status: string;
 }
 
-export interface Task {
+export interface ITask {
   id: number;
   title: string;
   description: string;
@@ -12,5 +12,9 @@ export interface Task {
 }
 
 export interface ITaskState {
-  items: Task[];
+  items: ITask[];
+}
+
+export interface IresponseGetAllTasks {
+  items: ITask[];
 }

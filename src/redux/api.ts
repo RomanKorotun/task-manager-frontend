@@ -18,3 +18,18 @@ export const addTask = createAsyncThunk(
     }
   }
 );
+
+export const getAllTasks = createAsyncThunk(
+  "task/getAllTasks",
+  async (_, thunkApi) => {
+    try {
+      const response = await axios.get("/tasks");
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      return thunkApi.rejectWithValue("Error");
+    }
+  }
+);

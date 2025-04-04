@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  /* background-color: #b2babb; */
+  flex-basis: 200px;
+  flex-shrink: 0;
   padding: 25px;
   border-right: 1px solid black;
 `;
