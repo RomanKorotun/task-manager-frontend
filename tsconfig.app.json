@@ -14,7 +14,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "incremental": true,
-    "outDir": "./dist/app"
+    "outDir": "./dist/app",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "include": ["src"]
 }
