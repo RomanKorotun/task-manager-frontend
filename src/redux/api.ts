@@ -33,3 +33,18 @@ export const getAllTasks = createAsyncThunk(
     }
   }
 );
+
+export const deleteTask = createAsyncThunk(
+  "task/deleteTask",
+  async (id: number, thunkApi) => {
+    try {
+      const response = await axios.delete(`/tasks/${id}`);
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      return thunkApi.rejectWithValue("Error");
+    }
+  }
+);

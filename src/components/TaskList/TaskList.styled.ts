@@ -11,6 +11,5 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.div`
-  min-height: 170px;
   flex-basis: calc((100% - 2 * 20px) / 3);
 `;
