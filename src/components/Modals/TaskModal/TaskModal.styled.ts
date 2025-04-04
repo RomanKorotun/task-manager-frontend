@@ -31,7 +31,7 @@ export const SubmitButton = styled.button`
   height: 38px;
 `;
 
-export const CreateTaskForm = styled(Form)`
+export const TaskForm = styled(Form)`
   display: flex;
   flex-direction: column;
 `;

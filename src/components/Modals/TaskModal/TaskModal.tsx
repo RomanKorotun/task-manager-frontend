@@ -3,7 +3,7 @@ import { FC } from "react";
 import Modal from "react-modal";
 import {
   CloseModalBtn,
-  CreateTaskForm,
+  TaskForm,
   CustomModal,
   ErrMsg,
   FieldStyled,
@@ -12,24 +12,39 @@ import {
   TextArea,
   TitleForm,
   WrapperField,
-} from "./CreateTaskModal.styled";
+} from "./TaskModal.styled";
 import { CreateTaskSchema } from "../../../validationSchemas/taskSchema";
-import { addTask } from "../../../redux/api";
+import { addTask, updateTask } from "../../../redux/api";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../redux/store";
+import { ITask } from "../../../interfaces";
 
-interface ICreateTaskModal {
-  isOpenCreateTaskModal: boolean;
-  toggleCreateTaskModal: () => void;
+interface ITaskModal {
+  task?: ITask;
+  isOpenTaskModal: boolean;
+  toggleTaskModal: () => void;
 }
 
 Modal.setAppElement("#root");
 
-export const CreateTaskModal: FC<ICreateTaskModal> = ({
-  isOpenCreateTaskModal,
-  toggleCreateTaskModal,
+export const TaskModal: FC<ITaskModal> = ({
+  task,
+  isOpenTaskModal: isOpenCreateTaskModal,
+  toggleTaskModal: toggleCreateTaskModal,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const initialValues = task
+    ? {
+        title: task.title,
+        description: task.description,
+        status: task.status,
+      }
+    : {
+        title: "",
+        description: "",
+        status: "",
+      };
   return (
     <CustomModal
       isOpen={isOpenCreateTaskModal}
@@ -37,18 +52,18 @@ export const CreateTaskModal: FC<ICreateTaskModal> = ({
       contentLabel="Create Task Modal"
     >
       <Formik
-        initialValues={{
-          title: "",
-          description: "",
-          status: "",
-        }}
+        initialValues={initialValues}
         validationSchema={CreateTaskSchema}
         onSubmit={(values) => {
-          dispatch(addTask(values));
+          if (task) {
+            dispatch(updateTask({ id: task.id, values }));
+          } else {
+            dispatch(addTask(values));
+          }
           toggleCreateTaskModal();
         }}
       >
-        <CreateTaskForm>
+        <TaskForm>
           <TitleForm>Create Task</TitleForm>
           <WrapperField>
             <FieldStyled name="title" placeholder="Title" />
@@ -73,7 +88,7 @@ export const CreateTaskModal: FC<ICreateTaskModal> = ({
           </WrapperField>
 
           <SubmitButton type="submit">Submit</SubmitButton>
-        </CreateTaskForm>
+        </TaskForm>
       </Formik>
       <CloseModalBtn type="button" onClick={toggleCreateTaskModal} />
     </CustomModal>

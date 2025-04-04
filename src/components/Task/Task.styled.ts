@@ -38,3 +38,13 @@ export const DeleteBtn = styled.button`
   padding: 0;
   cursor: pointer;
 `;
+
+export const EditBtn = styled.button`
+  position: absolute;
+  top: 36px;
+  right: 6px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+`;

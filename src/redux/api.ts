@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ICreateTaskData } from "../interfaces";
+import { ICreateTaskData, IUpdateTaskData } from "../interfaces";
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
@@ -39,6 +39,21 @@ export const deleteTask = createAsyncThunk(
   async (id: number, thunkApi) => {
     try {
       const response = await axios.delete(`/tasks/${id}`);
+      return response.data;
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+      return thunkApi.rejectWithValue("Error");
+    }
+  }
+);
+
+export const updateTask = createAsyncThunk(
+  "task/updateTask",
+  async ({ id, values }: IUpdateTaskData, thunkApi) => {
+    try {
+      const response = await axios.put(`/tasks/${id}`, values);
       return response.data;
     } catch (error: unknown) {
       if (error instanceof Error) {

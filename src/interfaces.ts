@@ -4,6 +4,11 @@ export interface ICreateTaskData {
   status: string;
 }
 
+export interface IUpdateTaskData {
+  id: number;
+  values: { title?: string; description?: string; status?: string };
+}
+
 export interface ITask {
   id: number;
   title: string;
