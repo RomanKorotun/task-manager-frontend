@@ -1,15 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITaskState, ITask, IresponseGetAllTasks } from "../../interfaces";
+import { ITasksState, ITask, IresponseGetAllTasks } from "../../interfaces";
 import { addTask, deleteTask, getAllTasks, updateTask } from "../api";
 
-const initialState: ITaskState = {
+const initialState: ITasksState = {
   items: [],
 };
 
-const authSlice = createSlice({
+const taskSlice = createSlice({
   name: "task",
   initialState,
-  reducers: {},
+  reducers: {
+    actionFilter: (state) => {
+      state.items = [];
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(addTask.fulfilled, (state, action: PayloadAction<ITask>) => {
@@ -37,4 +41,5 @@ const authSlice = createSlice({
       }),
 });
 
-export const taskReducer = authSlice.reducer;
+export const { actionFilter } = taskSlice.actions;
+export const taskReducer = taskSlice.reducer;

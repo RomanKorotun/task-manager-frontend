@@ -13,7 +13,7 @@ import { CiEdit } from "react-icons/ci";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { deleteTask } from "../../redux/api";
-import { TaskModal } from "../Modals/TaskModal/TaskModal";
+import { TaskModal } from "../TaskModal/TaskModal";
 
 interface ITaskProps {
   task: ITask;

@@ -4,6 +4,12 @@ export interface ICreateTaskData {
   status: string;
 }
 
+export interface IGetAllTasks {
+  status: string;
+  title: string;
+  description: string;
+}
+
 export interface IUpdateTaskData {
   id: number;
   values: { title?: string; description?: string; status?: string };
@@ -16,8 +22,20 @@ export interface ITask {
   status: "completed" | "not_completed";
 }
 
-export interface ITaskState {
+export interface ITasksState {
   items: ITask[];
+}
+
+export interface IFiltersState {
+  status: string;
+  title: string;
+  description: string;
+}
+
+export interface ISetFilters {
+  status?: string;
+  title?: string;
+  description?: string;
 }
 
 export interface IresponseGetAllTasks {

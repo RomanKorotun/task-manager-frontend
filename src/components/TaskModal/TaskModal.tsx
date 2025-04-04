@@ -13,11 +13,11 @@ import {
   TitleForm,
   WrapperField,
 } from "./TaskModal.styled";
-import { CreateTaskSchema } from "../../../validationSchemas/taskSchema";
-import { addTask, updateTask } from "../../../redux/api";
+import { CreateTaskSchema } from "../../validationSchemas/taskSchema";
+import { addTask, updateTask } from "../../redux/api";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../redux/store";
-import { ITask } from "../../../interfaces";
+import { AppDispatch } from "../../redux/store";
+import { ITask } from "../../interfaces";
 
 interface ITaskModal {
   task?: ITask;

@@ -1,6 +1,9 @@
 import { FC, useState } from "react";
-import { CreateTaskBtn, Wrapper } from "./Sidebar.styled";
-import { TaskModal } from "../Modals/TaskModal/TaskModal";
+import { CreateTaskBtn, Filters, Wrapper } from "./Sidebar.styled";
+import { TaskModal } from "../TaskModal/TaskModal";
+import { StatusFilter } from "../Filters/StatusFilter/StatusFilter";
+import { TitleFilter } from "../Filters/TitleFilter/TitleFilter";
+import { DescriptionFilter } from "../Filters/DescriptionFilter/DescriptionFilter";
 
 export const Sidebar: FC = () => {
   const [isOpenTaskModal, setIsOpenTaskModal] = useState<boolean>(false);
@@ -11,7 +14,12 @@ export const Sidebar: FC = () => {
   return (
     <Wrapper>
       <CreateTaskBtn onClick={toggleTaskModal}>Create Task</CreateTaskBtn>
-      <div>Filters</div>
+      <div>
+        <Filters>Filters</Filters>
+        <StatusFilter />
+        <TitleFilter />
+        <DescriptionFilter />
+      </div>
       <TaskModal
         isOpenTaskModal={isOpenTaskModal}
         toggleTaskModal={toggleTaskModal}

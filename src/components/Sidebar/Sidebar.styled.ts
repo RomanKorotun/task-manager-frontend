@@ -14,3 +14,7 @@ export const CreateTaskBtn = styled.button`
   cursor: pointer;
   margin-bottom: 25px;
 `;
+
+export const Filters = styled.div`
+  margin-bottom: 10px;
+`;
