@@ -2,16 +2,22 @@ import { FC } from "react";
 import { Label, RadioOptions, Title, Wrapper } from "./StatusFilter.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { setFilters } from "../../../redux/filter/filterSlice";
-import { actionFilter } from "../../../redux/task/taskSlice";
+import {
+  setFilters,
+  setIsFilterReset,
+} from "../../../redux/filter/filterSlice";
 
 export const StatusFilter: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const status = useSelector((state: RootState) => state.filters.status);
-
+  const isResetFilters = useSelector(
+    (state: RootState) => state.filters.isResetFilters
+  );
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setFilters({ status: event.target.value }));
-    dispatch(actionFilter());
+    if (isResetFilters) {
+      dispatch(setIsFilterReset());
+    }
   };
 
   return (

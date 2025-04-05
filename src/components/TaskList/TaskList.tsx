@@ -34,6 +34,9 @@ export const TaskList: FC = () => {
   useEffect(() => {
     if (isResetFilters) {
       dispatch(getAllTasks({ status, title, description }));
+      prevStatus.current = status;
+      prevTitle.current = title;
+      prevDescription.current = description;
     }
 
     if (status !== prevStatus.current && !isResetFilters) {

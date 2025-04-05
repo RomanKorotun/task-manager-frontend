@@ -9,11 +9,7 @@ const initialState: ITasksState = {
 const taskSlice = createSlice({
   name: "task",
   initialState,
-  reducers: {
-    actionFilter: (state) => {
-      state.items = [];
-    },
-  },
+  reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(addTask.fulfilled, (state, action: PayloadAction<ITask>) => {
@@ -22,7 +18,7 @@ const taskSlice = createSlice({
       .addCase(
         getAllTasks.fulfilled,
         (state, action: PayloadAction<IresponseGetAllTasks>) => {
-          state.items = [...state.items, ...action.payload.items];
+          state.items = action.payload.items;
         }
       )
       .addCase(deleteTask.fulfilled, (state, action: PayloadAction<ITask>) => {
@@ -41,5 +37,4 @@ const taskSlice = createSlice({
       }),
 });
 
-export const { actionFilter } = taskSlice.actions;
 export const taskReducer = taskSlice.reducer;

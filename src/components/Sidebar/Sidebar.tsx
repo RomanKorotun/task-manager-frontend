@@ -4,22 +4,27 @@ import { TaskModal } from "../TaskModal/TaskModal";
 import { StatusFilter } from "../Filters/StatusFilter/StatusFilter";
 import { TitleFilter } from "../Filters/TitleFilter/TitleFilter";
 import { DescriptionFilter } from "../Filters/DescriptionFilter/DescriptionFilter";
-import { filtersReset } from "../../redux/filter/filterSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
-import { actionFilter } from "../../redux/task/taskSlice";
+import { filtersReset, setIsFilterReset } from "../../redux/filter/filterSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
 
 export const Sidebar: FC = () => {
   const [isOpenTaskModal, setIsOpenTaskModal] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
+
+  const isResetFilters = useSelector(
+    (state: RootState) => state.filters.isResetFilters
+  );
 
   const toggleTaskModal = () => {
     setIsOpenTaskModal((prevState) => !prevState);
   };
 
   const handleReset = () => {
-    dispatch(filtersReset());
-    dispatch(actionFilter());
+    if (!isResetFilters) {
+      dispatch(setIsFilterReset());
+      dispatch(filtersReset());
+    }
   };
 
   return (

@@ -12,4 +12,6 @@ export const List = styled.ul`
 
 export const Item = styled.div`
   flex-basis: calc((100% - 2 * 20px) / 3);
+  word-wrap: break-word;
+  word-break: break-word;
 `;

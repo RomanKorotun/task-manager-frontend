@@ -14,6 +14,7 @@ const filterSlice = createSlice({
   reducers: {
     setFilters: (state, action: PayloadAction<ISetFilters>) => {
       const { status, title, description } = action.payload;
+      console.log(status);
       if (status !== undefined) {
         state.status = status;
       }
@@ -28,10 +29,13 @@ const filterSlice = createSlice({
       state.status = "all";
       state.title = "";
       state.description = "";
-      state.isResetFilters = true;
+    },
+    setIsFilterReset: (state) => {
+      state.isResetFilters = !state.isResetFilters;
     },
   },
 });
 
-export const { setFilters, filtersReset } = filterSlice.actions;
+export const { setFilters, filtersReset, setIsFilterReset } =
+  filterSlice.actions;
 export const filtersReducer = filterSlice.reducer;

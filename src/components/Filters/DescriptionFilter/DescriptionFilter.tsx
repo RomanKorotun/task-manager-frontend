@@ -1,27 +1,25 @@
-import { FC, useRef } from "react";
+import { FC } from "react";
 import { Input, Title, Wrapper } from "./DescriptionFilter.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
-import { setFilters } from "../../../redux/filter/filterSlice";
-import { actionFilter } from "../../../redux/task/taskSlice";
+import {
+  setFilters,
+  setIsFilterReset,
+} from "../../../redux/filter/filterSlice";
 
 export const DescriptionFilter: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const description = useSelector(
     (state: RootState) => state.filters.description
   );
-  const timer = useRef<number | null>(null);
-
+  const isResetFilters = useSelector(
+    (state: RootState) => state.filters.isResetFilters
+  );
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setFilters({ description: event.target.value }));
-    if (timer.current) {
-      clearTimeout(timer.current);
+    if (isResetFilters) {
+      dispatch(setIsFilterReset());
     }
-
-    timer.current = window.setTimeout(() => {
-      console.log("setTimeout");
-      dispatch(actionFilter());
-    }, 1000);
   };
   return (
     <Wrapper>

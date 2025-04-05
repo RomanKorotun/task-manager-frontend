@@ -11,16 +11,34 @@ export const TaskCard = styled.div`
   padding-right: 30px;
   padding-bottom: 10px;
   padding-left: 10px;
-  min-height: 170px;
+  min-height: 205px;
 `;
 
 export const Title = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Description = styled.div`
   font-size: 13px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Status = styled.div`
