@@ -64,7 +64,8 @@ export const TaskModal: FC<ITaskModal> = ({
         }}
       >
         <TaskForm>
-          <TitleForm>Create Task</TitleForm>
+          {task && <TitleForm>Edit Task</TitleForm>}
+          {!task && <TitleForm>Create Task</TitleForm>}
           <WrapperField>
             <FieldStyled name="title" placeholder="Title" />
             <ErrMsg component="div" name="title" />
