@@ -7,6 +7,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width,
     height,
+    maxWidth: 1920,
   });
 
   mainWindow.loadURL("http://localhost:5173");
