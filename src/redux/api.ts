@@ -2,13 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ICreateTaskData, IGetAllTasks, IUpdateTaskData } from "../interfaces";
 
-axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export const addTask = createAsyncThunk(
   "task/addTask",
   async (task: ICreateTaskData, thunkApi) => {
     try {
-      const response = await axios.post("/tasks", task);
+      const response = await axios.post("/api/tasks", task);
       return response.data;
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -24,7 +24,7 @@ export const getAllTasks = createAsyncThunk(
   async ({ status, title, description }: IGetAllTasks, thunkApi) => {
     try {
       const response = await axios.get(
-        `/tasks?title=${title}&description=${description}&status=${status}`
+        `/api/tasks?title=${title}&description=${description}&status=${status}`
       );
       return response.data;
     } catch (error: unknown) {
@@ -40,7 +40,7 @@ export const deleteTask = createAsyncThunk(
   "task/deleteTask",
   async (id: number, thunkApi) => {
     try {
-      const response = await axios.delete(`/tasks/${id}`);
+      const response = await axios.delete(`/api/tasks/${id}`);
       return response.data;
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -55,7 +55,7 @@ export const updateTask = createAsyncThunk(
   "task/updateTask",
   async ({ id, values }: IUpdateTaskData, thunkApi) => {
     try {
-      const response = await axios.put(`/tasks/${id}`, values);
+      const response = await axios.put(`/api/tasks/${id}`, values);
       return response.data;
     } catch (error: unknown) {
       if (error instanceof Error) {

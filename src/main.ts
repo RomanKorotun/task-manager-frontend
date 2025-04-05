@@ -1,4 +1,5 @@
 import { app, BrowserWindow, screen } from "electron";
+import "dotenv/config";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -9,8 +10,12 @@ function createWindow() {
     height,
     maxWidth: 1920,
   });
-
-  mainWindow.loadURL("http://localhost:5173");
+  const FRONTEND_URL = process.env.VITE_FRONTEND_URL;
+  if (FRONTEND_URL) {
+    mainWindow.loadURL(FRONTEND_URL);
+  } else {
+    console.error("VITE_FRONTEND_URL is not defined in .env file");
+  }
 
   mainWindow.on("closed", () => {
     mainWindow = null;
