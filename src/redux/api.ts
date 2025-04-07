@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { ICreateTaskData, IGetAllTasks, IUpdateTaskData } from "../interfaces";
+import { RootState } from "./store";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -9,7 +10,8 @@ export const addTask = createAsyncThunk(
   async (task: ICreateTaskData, thunkApi) => {
     try {
       const response = await axios.post("/api/tasks", task);
-      return response.data;
+      const state = thunkApi.getState() as RootState;
+      return { task: response.data, filters: state.filters };
     } catch (error: unknown) {
       if (error instanceof Error) {
         return thunkApi.rejectWithValue(error.message);

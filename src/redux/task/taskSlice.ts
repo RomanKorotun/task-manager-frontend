@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITasksState, ITask, IresponseGetAllTasks } from "../../interfaces";
+import {
+  ITasksState,
+  ITask,
+  IresponseGetAllTasks,
+  IAddTaskPayload,
+} from "../../interfaces";
 import { addTask, deleteTask, getAllTasks, updateTask } from "../api";
 
 const initialState: ITasksState = {
@@ -12,9 +17,30 @@ const taskSlice = createSlice({
   reducers: {},
   extraReducers: (builder) =>
     builder
-      .addCase(addTask.fulfilled, (state, action: PayloadAction<ITask>) => {
-        state.items = [...state.items, action.payload];
-      })
+      .addCase(
+        addTask.fulfilled,
+        (state, action: PayloadAction<IAddTaskPayload>) => {
+          const { task, filters } = action.payload;
+
+          const isDescriptionValid = task.description
+            .toLowerCase()
+            .includes(filters.description?.toLowerCase());
+
+          const isTitleValid = task.title
+            .toLowerCase()
+            .includes(filters.title?.toLowerCase());
+
+          const isStatusValid =
+            filters.status === "all" || task.status === filters.status;
+
+          const isTaskValid =
+            isDescriptionValid && isTitleValid && isStatusValid;
+
+          if (filters.isResetFilters || isTaskValid) {
+            state.items = [...state.items, task];
+          }
+        }
+      )
       .addCase(
         getAllTasks.fulfilled,
         (state, action: PayloadAction<IresponseGetAllTasks>) => {

@@ -14,7 +14,6 @@ const filterSlice = createSlice({
   reducers: {
     setFilters: (state, action: PayloadAction<ISetFilters>) => {
       const { status, title, description } = action.payload;
-      console.log(status);
       if (status !== undefined) {
         state.status = status;
       }

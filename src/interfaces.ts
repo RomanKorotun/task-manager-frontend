@@ -22,6 +22,18 @@ export interface ITask {
   status: "completed" | "not_completed";
 }
 
+interface IFilters {
+  description: string;
+  isResetFilters: boolean;
+  status: string;
+  title: string;
+}
+
+export interface IAddTaskPayload {
+  task: ITask;
+  filters: IFilters;
+}
+
 export interface ITasksState {
   items: ITask[];
 }
