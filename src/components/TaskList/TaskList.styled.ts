@@ -11,7 +11,10 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.div`
-  flex-basis: calc((100% - 2 * 20px) / 3);
+  flex-basis: calc((100% - 2 * 20px) / 2);
+  @media screen and (min-width: 1024px) and (max-width: 1199px) {
+    flex-basis: calc((100% - 2 * 20px) / 2);
+  }
   @media screen and (min-width: 1200px) and (max-width: 1599px) {
     flex-basis: calc((100% - 2 * 20px) / 3);
   }
