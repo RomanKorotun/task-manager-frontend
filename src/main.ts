@@ -9,6 +9,7 @@ function createWindow() {
     width,
     height,
     maxWidth: 1920,
+    autoHideMenuBar: true,
   });
   const FRONTEND_URL = process.env.VITE_FRONTEND_URL;
   if (FRONTEND_URL) {
